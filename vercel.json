@@ -1,10 +1,19 @@
 {
-  "rewrites": [
-    { "source": "/ganpati/:path*", "destination": "/:path*" }
-  ],
-  "functions": {
-    "app.py": {
-      "runtime": "python3.9"
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/index.py",
+      "use": "@vercel/python"
     }
-  }
+  ],
+  "routes": [
+    {
+      "src": "/ganpati/(.*)",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.py"
+    }
+  ]
 }

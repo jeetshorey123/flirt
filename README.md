@@ -76,9 +76,27 @@ review/
 
 ### Vercel Deployment
 
-1. Install Vercel CLI: `npm install -g vercel`
-2. Run: `vercel`
-3. Follow the prompts
+1. **Connect GitHub Repository:**
+   - Go to [vercel.com](https://vercel.com)
+   - Import your GitHub repository: `jeetshorey123/flirt`
+
+2. **Set Environment Variables:**
+   In your Vercel dashboard, add these environment variables:
+   ```
+   REACT_APP_SUPABASE_URL=https://pngzkvczhcuwwowztvcb.supabase.co
+   REACT_APP_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBuZ3prdmN6aGN1d3dvd3p0dmNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIzMzY5NzksImV4cCI6MjA2NzkxMjk3OX0.j0eHLlyXuySaZG41QH0pXA-iW1vT0HD-eiE99dwiF8w
+   SECRET_KEY=your-production-secret-key-here
+   ```
+
+3. **Deploy:**
+   - Vercel will automatically deploy from your GitHub repository
+   - The `/ganpati/` route will redirect to your main app
+
+### Local Development
+
+```bash
+python app.py
+```
 
 ### Environment Variables for Production
 
