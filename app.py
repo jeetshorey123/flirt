@@ -8,25 +8,28 @@ app.secret_key = os.environ.get('SECRET_KEY', 'your-secret-key-here')
 
 @app.route('/')
 def index():
-    # Get all reviews from Supabase
+    # Get review statistics only (don't fetch actual reviews for public display)
     supabase = get_supabase_client()
     try:
-        response = supabase.table('reviews').select('*').order('created_at', desc=True).execute()
+        response = supabase.table('reviews').select('stars').execute()
         reviews = response.data
         
-        # Calculate average rating
+        # Calculate average rating and total count
         if reviews:
             total_rating = sum(review['stars'] for review in reviews)
             avg_rating = round(total_rating / len(reviews), 1)
+            total_reviews = len(reviews)
         else:
             avg_rating = 0
+            total_reviews = 0
             
     except Exception as e:
-        print(f"Error fetching reviews: {e}")
-        reviews = []
+        print(f"Error fetching review stats: {e}")
         avg_rating = 0
+        total_reviews = 0
     
-    return render_template('index.html', reviews=reviews, avg_rating=avg_rating, total_reviews=len(reviews))
+    # Don't pass reviews to template, only stats
+    return render_template('index.html', reviews=[], avg_rating=avg_rating, total_reviews=total_reviews)
 
 @app.route('/submit_review', methods=['POST'])
 def submit_review():
@@ -61,13 +64,36 @@ def submit_review():
 
 @app.route('/api/reviews')
 def api_reviews():
-    """API endpoint to get reviews as JSON"""
+    """Protected API endpoint to get reviews as JSON - for admin use only"""
+    # You can add authentication here if needed
     supabase = get_supabase_client()
     try:
         response = supabase.table('reviews').select('*').order('created_at', desc=True).execute()
         return jsonify(response.data)
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+@app.route('/admin/reviews')
+def admin_reviews():
+    """Admin page to view all reviews - you can add authentication here"""
+    supabase = get_supabase_client()
+    try:
+        response = supabase.table('reviews').select('*').order('created_at', desc=True).execute()
+        reviews = response.data
+        
+        # Calculate average rating
+        if reviews:
+            total_rating = sum(review['stars'] for review in reviews)
+            avg_rating = round(total_rating / len(reviews), 1)
+        else:
+            avg_rating = 0
+            
+    except Exception as e:
+        print(f"Error fetching reviews: {e}")
+        reviews = []
+        avg_rating = 0
+    
+    return render_template('admin_reviews.html', reviews=reviews, avg_rating=avg_rating, total_reviews=len(reviews))
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

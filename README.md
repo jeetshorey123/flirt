@@ -8,7 +8,9 @@ A beautiful Flask web application for collecting and displaying reviews with a 5
 - 💕 Beautiful pink hearts animated background
 - 📸 Profile photo display
 - 📝 Review submission form
-- 📊 Average rating calculation
+- 📊 Average rating calculation (public)
+- 🔒 **Private reviews** - Reviews are not displayed publicly
+- 👤 **Admin panel** - Private view of all reviews at `/admin/reviews`
 - 💾 Supabase database integration
 - 📱 Responsive design
 - 🚀 Vercel deployment ready
@@ -87,9 +89,10 @@ Set these environment variables in your deployment platform:
 
 ## API Endpoints
 
-- `GET /` - Main page with reviews
+- `GET /` - Main page with review form (reviews hidden from public)
 - `POST /submit_review` - Submit a new review
-- `GET /api/reviews` - Get reviews as JSON
+- `GET /admin/reviews` - **Admin only** - View all submitted reviews
+- `GET /api/reviews` - Get reviews as JSON (for admin use)
 
 ## Review Data Structure
 
@@ -107,11 +110,14 @@ Each review contains:
 - **Photo**: Replace `static/images/profile.jpg`
 - **Text**: Customize labels and placeholders in the template
 
-## Security Notes
+## Privacy & Security
 
-- Change the `SECRET_KEY` in production
-- Configure proper Row Level Security policies in Supabase
-- Consider adding rate limiting for review submissions
+- 🔒 **Reviews are private** - Not displayed publicly to maintain authenticity
+- 📊 Only average rating and total count are shown publicly
+- 👤 Admin can view all reviews at `/admin/reviews`
+- 🔑 Change the `SECRET_KEY` in production
+- 🛡️ Configure proper Row Level Security policies in Supabase
+- ⏱️ Consider adding rate limiting for review submissions
 
 ## Support
 
