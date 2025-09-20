@@ -80,7 +80,12 @@ review/
    - Go to [vercel.com](https://vercel.com)
    - Import your GitHub repository: `jeetshorey123/flirt`
 
-2. **Set Environment Variables:**
+2. **Vercel Configuration:**
+   - The project uses `@vercel/python` runtime
+   - Simple routing configuration for Flask app
+   - All requests routed to `api/index.py`
+
+3. **Set Environment Variables:**
    In your Vercel dashboard, add these environment variables:
    ```
    REACT_APP_SUPABASE_URL=https://pngzkvczhcuwwowztvcb.supabase.co
@@ -88,9 +93,9 @@ review/
    SECRET_KEY=your-production-secret-key-here
    ```
 
-3. **Deploy:**
+4. **Deploy:**
    - Vercel will automatically deploy from your GitHub repository
-   - The `/ganpati/` route will redirect to your main app
+   - All routes will be handled by the Flask application
 
 ### Local Development
 

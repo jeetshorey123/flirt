@@ -261,8 +261,8 @@ def admin_reviews():
     """
 
 # This is the main handler function for Vercel
-def handler(req):
-    return app
+app = Flask(__name__)
+app.secret_key = os.environ.get('SECRET_KEY', 'your-secret-key-here')
 
 # For local development
 if __name__ == '__main__':
