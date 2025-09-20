@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate My Flirt - Review Page</title>
+    <meta http-equiv="refresh" content="0; url=/api/index">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff69b4, #ffb6c1, #ffc0cb);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .loading {
+            text-align: center;
+            color: white;
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading">
+        <h1>Rate My Flirt 💕</h1>
+        <p>Loading your review page...</p>
+        <p>If you're not redirected, <a href="/api/index" style="color: white;">click here</a></p>
+    </div>
+    
+    <script>
+        // Redirect to the Flask app
+        window.location.href = '/api/index';
+    </script>
+</body>
+</html>

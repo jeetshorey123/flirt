@@ -260,10 +260,7 @@ def admin_reviews():
     </html>
     """
 
-# This is the main handler function for Vercel
-app = Flask(__name__)
-app.secret_key = os.environ.get('SECRET_KEY', 'your-secret-key-here')
-
+# This is the main Flask app for Vercel
 # For local development
 if __name__ == '__main__':
     app.run(debug=True)
